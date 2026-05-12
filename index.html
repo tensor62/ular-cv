@@ -13,126 +13,108 @@
 }
 
 body{
-  font-family: Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle at top, #f2f2f2, #d9d9d9);
+  background:#f4f4f4;
   color:#111;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
+/* grain */
 body::before{
   content:"";
   position:fixed;
-  width:100%;
-  height:100%;
+  inset:0;
   background:url("https://www.transparenttextures.com/patterns/noise.png");
   opacity:0.04;
   pointer-events:none;
 }
 
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:60px;
-  padding:40px;
-  animation:fade 1.6s ease;
-}
-
-/* PHOTO */
+/* PHOTO TOP LEFT */
 .photo{
-  width:260px;
-  height:340px;
+  position:fixed;
+  top:25px;
+  left:25px;
+  width:110px;
+  height:140px;
   object-fit:cover;
-  border-radius:18px;
-  border:1px solid rgba(0,0,0,0.15);
-  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.12);
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
 }
 
-/* TEXT */
-.hero-text h1{
-  font-size:64px;
-  font-weight:200;
-  letter-spacing:8px;
-}
-
-.hero-text h2{
-  font-size:18px;
-  font-weight:300;
-  letter-spacing:5px;
-  opacity:0.7;
-  margin-top:10px;
-}
-
-.btn{
-  margin-top:30px;
-  display:inline-block;
-  padding:14px 40px;
-  border:1px solid #111;
-  border-radius:50px;
-  text-decoration:none;
-  color:#111;
-  transition:0.4s ease;
-}
-
-.btn:hover{
-  background:#111;
-  color:#fff;
-  transform:translateY(-3px);
-}
-
-/* SECTIONS */
-section{
+/* MAIN LAYOUT */
+.container{
   max-width:900px;
   margin:0 auto;
-  padding:100px 20px;
+  padding:120px 40px 60px 180px;
 }
 
+/* NAME */
+h1{
+  font-size:52px;
+  font-weight:200;
+  letter-spacing:6px;
+  margin-bottom:8px;
+}
+
+/* POSITION */
+h2{
+  font-size:14px;
+  font-weight:400;
+  letter-spacing:4px;
+  opacity:0.6;
+  margin-bottom:40px;
+}
+
+/* SECTION TITLE */
 h3{
-  font-size:26px;
-  font-weight:300;
+  font-size:14px;
+  font-weight:500;
   letter-spacing:3px;
-  margin-bottom:20px;
-}
-
-p{
-  line-height:1.8;
+  margin-top:60px;
+  margin-bottom:15px;
   opacity:0.8;
 }
 
-.card{
-  background:rgba(255,255,255,0.65);
-  border:1px solid rgba(0,0,0,0.08);
-  padding:20px;
-  margin-top:15px;
-  border-radius:16px;
-  backdrop-filter:blur(10px);
-  transition:0.3s ease;
+/* TEXT */
+p{
+  font-size:15px;
+  line-height:1.7;
+  opacity:0.85;
+  max-width:700px;
 }
 
-.card:hover{
-  transform:translateY(-5px);
+/* EXPERIENCE BLOCK */
+.block{
+  margin-bottom:18px;
+  padding:14px 0;
+  border-bottom:1px solid rgba(0,0,0,0.08);
 }
 
-@keyframes fade{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
+.block b{
+  font-weight:500;
 }
 
-/* mobile */
+/* CONTACT */
+.contact{
+  margin-top:30px;
+  font-size:14px;
+  opacity:0.8;
+  line-height:1.8;
+}
+
+/* MOBILE */
 @media(max-width:768px){
-  .hero{
-    flex-direction:column;
-    text-align:center;
-  }
-
   .photo{
-    width:200px;
-    height:260px;
+    position:relative;
+    margin:20px;
   }
 
-  .hero-text h1{
-    font-size:40px;
+  .container{
+    padding:20px;
+  }
+
+  h1{
+    font-size:34px;
   }
 }
 </style>
@@ -141,70 +123,53 @@ p{
 
 <body>
 
-<div class="hero">
+<img src="me.jpg" class="photo" alt="photo">
 
-  <img src="me.jpg" class="photo" alt="photo">
+<div class="container">
 
-  <div class="hero-text">
-    <h1>УЛАР БЕКТУРСУН</h1>
-    <h2>АДМИНИСТРАТОР</h2>
+  <h1>УЛАР БЕКТУРСУН</h1>
+  <h2>АДМИНИСТРАТОР</h2>
 
-    <a class="btn" href="mailto:tensor620@gmail.com">Связаться</a>
-  </div>
-
-</div>
-
-<section>
-  <h3>ОБО МНЕ</h3>
   <p>
     Опытный администратор с навыками премиального сервиса,
     управления персоналом и контроля качества обслуживания.
-    Умею работать в динамичной среде, решать конфликты и
-    создавать комфортную атмосферу для гостей.
   </p>
-</section>
 
-<section>
   <h3>ОПЫТ РАБОТЫ</h3>
 
-  <div class="card">
+  <div class="block">
     <b>Ресторан «Туман» | Ош</b><br>
-    Администратор<br><br>
-    • Встреча и размещение гостей<br>
-    • Управление персоналом зала<br>
-    • Контроль сервиса и чистоты<br>
-    • Организация банкетов и бронирований<br>
-    • Решение конфликтных ситуаций
+    Администратор<br>
+    Встреча гостей, управление залом, банкеты, контроль сервиса
   </div>
 
-  <div class="card">
+  <div class="block">
     <b>Клуб «Green Club» | Каракол</b><br>
-    Администратор<br><br>
-    • Управление процессами в ночное время<br>
-    • Контроль персонала и безопасности
+    Администратор<br>
+    Оперативное управление, контроль персонала и безопасности
   </div>
 
-  <div class="card">
+  <div class="block">
     <b>Medical Assistance Group | Бишкек</b><br>
-    Старший администратор / Контроль качества (2024 — наст. время)<br><br>
-    • Координация сотрудников<br>
-    • Контроль качества звонков<br>
-    • Касса и отчетность<br>
-    • KPI анализ и базы данных<br>
-    • Работа с претензиями
+    Старший администратор / Контроль качества (2024 — наст. время)<br>
+    Управление сменой, KPI, касса, аналитика, претензии
   </div>
 
-</section>
+  <h3>ОБРАЗОВАНИЕ</h3>
 
-<section>
+  <div class="block">
+    Кыргызская государственная медицинская академия (КГМА)<br>
+    Стоматология (2022 — настоящее время)
+  </div>
+
   <h3>КОНТАКТЫ</h3>
 
-  <div class="card">
+  <div class="contact">
     📞 +996 559 463 626<br>
     📧 tensor620@gmail.com
   </div>
 
-</section>
+</div>
 
 </body>
 </html>
