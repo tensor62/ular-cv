@@ -1,18 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Улар Бектурсун</title>
 
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 body{
-background:black;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-font-family:Helvetica,sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at top, #f2f2f2, #d9d9d9);
+  color:#111;
+  overflow-x:hidden;
+}
+
+/* мягкий grain эффект */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-image:url("https://www.transparenttextures.com/patterns/noise.png");
+  opacity:0.04;
+  pointer-events:none;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  animation:fade 1.8s ease;
+}
+
+.hero h1{
+  font-size:72px;
+  font-weight:200;
+  letter-spacing:10px;
+}
+
+.hero h2{
+  margin-top:15px;
+  font-size:18px;
+  font-weight:300;
+  letter-spacing:6px;
+  opacity:0.7;
+}
+
+.btn{
+  margin-top:40px;
+  padding:14px 40px;
+  border:1px solid #111;
+  border-radius:50px;
+  text-decoration:none;
+  color:#111;
+  transition:0.4s ease;
+}
+
+.btn:hover{
+  background:#111;
+  color:#fff;
+  transform:translateY(-3px);
+}
+
+/* SECTIONS */
+section{
+  max-width:900px;
+  margin:0 auto;
+  padding:120px 20px;
+}
+
+h3{
+  font-size:26px;
+  font-weight:300;
+  margin-bottom:20px;
+  letter-spacing:3px;
+}
+
+p{
+  font-size:16px;
+  line-height:1.8;
+  opacity:0.8;
+}
+
+/* CARDS */
+.card{
+  background:rgba(255,255,255,0.6);
+  border:1px solid rgba(0,0,0,0.08);
+  padding:25px;
+  margin-top:20px;
+  border-radius:18px;
+  backdrop-filter:blur(10px);
+  transition:0.4s ease;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+/* CONTACT */
+.contact{
+  text-align:center;
+}
+
+.contact a{
+  display:inline-block;
+  margin:10px;
+  color:#111;
+  text-decoration:none;
+  border-bottom:1px solid #111;
+}
+
+/* ANIMATION */
+@keyframes fade{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
 
@@ -20,7 +132,72 @@ font-family:Helvetica,sans-serif;
 
 <body>
 
-<h1>УЛАР БЕКТУРСУН</h1>
+<!-- HERO -->
+<div class="hero">
+  <h1>УЛАР БЕКТУРСУН</h1>
+  <h2>АДМИНИСТРАТОР</h2>
+
+  <a class="btn" href="mailto:tensor620@gmail.com">Связаться</a>
+</div>
+
+<!-- ABOUT -->
+<section>
+  <h3>ОБО МНЕ</h3>
+  <p>
+    Опытный администратор с навыками премиального клиентского сервиса,
+    координации команды и контроля качества обслуживания.
+    Создаю комфортную атмосферу для гостей и эффективно решаю
+    организационные задачи в динамичной среде.
+  </p>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+  <h3>ОПЫТ</h3>
+
+  <div class="card">
+    <b>Medical Assistance Group</b><br>
+    Оператор колл-центра / Контроль качества / Старший администратор
+  </div>
+
+  <div class="card">
+    <b>HEDO (Москва)</b><br>
+    Официант
+  </div>
+
+  <div class="card">
+    <b>Green Club (Каракол)</b><br>
+    Администратор
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+  <h3>ОБРАЗОВАНИЕ</h3>
+
+  <div class="card">
+    Кыргызская государственная медицинская академия (КГМА)<br>
+    Стоматология (2022 — настоящее время)
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <h3>НАВЫКИ</h3>
+
+  <div class="card">
+    Клиентский сервис · Коммуникация · Работа с возражениями ·
+    Контроль качества · ПК · Стрессоустойчивость · Документация
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h3>КОНТАКТЫ</h3>
+
+  <a href="tel:0559463626">+996 559 463 626</a><br>
+  <a href="mailto:tensor620@gmail.com">tensor620@gmail.com</a>
+</section>
 
 </body>
 </html>
