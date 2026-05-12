@@ -1,175 +1,87 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Улар Бектурсун</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Бектурсун Улар</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#0e0e0d; --bg2:#141413;
+      --ink:#f0ece4; --ink2:#8a8680;
+      --gold:#c9a96e; --gold2:#e8d5b0;
+      --line:rgba(201,169,110,0.18); --line2:rgba(240,236,228,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--ink); font-family:'Jost',sans-serif; font-weight:200; line-height:1.7; overflow-x:hidden; cursor:none; }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    .cursor { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+    .cursor-ring { position:fixed; width:36px; height:36px; border:1px solid rgba(201,169,110,0.5); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.18s ease; }
 
-body{
-  background:#f4f4f4;
-  color:#111;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-}
+    nav { position:fixed; top:0; left:0; right:0; z-index:500; display:flex; justify-content:space-between; align-items:center; padding:2rem 4rem; opacity:0; animation:fadeIn 1s 0.3s forwards; }
+    nav::after { content:''; position:absolute; bottom:0; left:4rem; right:4rem; height:1px; background:var(--line); }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:1rem; font-weight:300; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink); text-decoration:none; }
+    .nav-links { display:flex; gap:3rem; list-style:none; }
+    .nav-links a { font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink2); text-decoration:none; transition:color 0.3s; font-weight:300; }
+    .nav-links a:hover { color:var(--gold); }
 
-/* grain */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("https://www.transparenttextures.com/patterns/noise.png");
-  opacity:0.04;
-  pointer-events:none;
-}
+    #hero { height:100vh; display:grid; grid-template-columns:1fr 1fr; position:relative; overflow:hidden; }
+    .hero-photo { position:relative; overflow:hidden; opacity:0; animation:revealLeft 1.4s 0.2s cubic-bezier(0.77,0,0.18,1) forwards; }
+    .hero-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; filter:grayscale(15%) contrast(1.05); transform:scale(1.08); animation:photoZoom 8s 1.6s ease forwards; }
+    .hero-photo-overlay { position:absolute; inset:0; background:linear-gradient(to right,transparent 60%,var(--bg) 100%),linear-gradient(to bottom,var(--bg) 0%,transparent 15%,transparent 80%,var(--bg) 100%); }
+    .hero-text { display:flex; flex-direction:column; justify-content:center; padding:8rem 5rem 5rem 4rem; }
+    .hero-eyebrow { font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:2.5rem; opacity:0; animation:fadeUp 0.8s 1s forwards; }
+    .hero-name { font-family:'Playfair Display',serif; font-size:clamp(3rem,5.5vw,5.5rem); font-weight:300; line-height:1.0; letter-spacing:-0.01em; margin-bottom:1rem; opacity:0; animation:fadeUp 0.9s 1.1s forwards; }
+    .hero-name em { display:block; font-style:italic; color:var(--gold2); }
+    .hero-role { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink2); margin-bottom:3rem; opacity:0; animation:fadeUp 0.9s 1.2s forwards; }
+    .hero-bio { font-size:0.88rem; color:var(--ink2); line-height:1.9; max-width:400px; border-left:1px solid var(--gold); padding-left:1.5rem; margin-bottom:3rem; opacity:0; animation:fadeUp 0.9s 1.3s forwards; }
+    .hero-contacts { display:flex; flex-direction:column; gap:0.85rem; opacity:0; animation:fadeUp 0.9s 1.4s forwards; }
+    .contact-row { display:flex; align-items:center; gap:1rem; font-size:0.8rem; color:var(--ink2); text-decoration:none; transition:color 0.25s; letter-spacing:0.05em; }
+    .contact-row:hover { color:var(--gold); }
+    .contact-label { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); width:60px; flex-shrink:0; }
+    .hero-stats { position:absolute; bottom:0; left:0; right:0; display:flex; border-top:1px solid var(--line); opacity:0; animation:fadeIn 1s 1.6s forwards; }
+    .hero-stat { flex:1; padding:1.5rem 2rem; border-right:1px solid var(--line); text-align:center; }
+    .hero-stat:last-child { border-right:none; }
+    .stat-val { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:300; color:var(--gold); display:block; }
+    .stat-lbl { font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink2); }
 
-/* PHOTO TOP LEFT */
-.photo{
-  position:fixed;
-  top:25px;
-  left:25px;
-  width:110px;
-  height:140px;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid rgba(0,0,0,0.12);
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-}
+    .marquee-wrap { border-top:1px solid var(--line2); border-bottom:1px solid var(--line2); overflow:hidden; padding:0.8rem 0; background:var(--bg2); }
+    .marquee { display:flex; gap:4rem; animation:marquee 20s linear infinite; white-space:nowrap; }
+    .marquee span { font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink2); flex-shrink:0; }
+    .marquee span.dot { color:var(--gold); letter-spacing:0; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* MAIN LAYOUT */
-.container{
-  max-width:900px;
-  margin:0 auto;
-  padding:120px 40px 60px 180px;
-}
+    section.content { padding:7rem 4rem; background:var(--bg); }
+    section.content.alt { background:var(--bg2); }
+    .sec-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--line); }
+    .sec-left { display:flex; align-items:baseline; gap:1.5rem; }
+    .sec-num { font-family:'Playfair Display',serif; font-size:0.75rem; color:var(--gold); letter-spacing:0.1em; }
+    .sec-title { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:300; color:var(--ink); }
+    .sec-title em { font-style:italic; color:var(--gold2); }
+    .sec-count { font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink2); }
 
-/* NAME */
-h1{
-  font-size:52px;
-  font-weight:200;
-  letter-spacing:6px;
-  margin-bottom:8px;
-}
+    .exp-list { display:flex; flex-direction:column; }
+    .exp-item { display:grid; grid-template-columns:260px 1fr; gap:3rem; padding:3rem 0; border-bottom:1px solid var(--line2); opacity:0; transform:translateY(40px); transition:opacity 0.8s,transform 0.8s; }
+    .exp-item:first-child { padding-top:0; }
+    .exp-item.vis { opacity:1; transform:none; }
+    .exp-tag { display:inline-block; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:0.25rem 0.7rem; margin-bottom:1rem; }
+    .exp-company { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:300; color:var(--ink); margin-bottom:0.3rem; }
+    .exp-city { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink2); }
+    .exp-period { font-size:0.75rem; color:var(--gold); margin-top:0.8rem; }
+    .exp-role { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:300; font-style:italic; color:var(--gold2); margin-bottom:1.5rem; line-height:1.3; }
+    .exp-duties { list-style:none; display:flex; flex-direction:column; gap:0.9rem; }
+    .exp-duties li { font-size:0.83rem; color:var(--ink2); padding-left:1.4rem; position:relative; line-height:1.8; }
+    .exp-duties li::before { content:''; position:absolute; left:0; top:0.65em; width:14px; height:1px; background:var(--gold); }
+    .duty-key { color:var(--ink); font-weight:300; }
 
-/* POSITION */
-h2{
-  font-size:14px;
-  font-weight:400;
-  letter-spacing:4px;
-  opacity:0.6;
-  margin-bottom:40px;
-}
+    .skills-layout { display:grid; grid-template-columns:repeat(3,1fr); }
+    .skill-col { padding:2.5rem; border-right:1px solid var(--line2); opacity:0; transform:translateY(30px); transition:opacity 0.7s,transform 0.7s; }
+    .skill-col:last-child { border-right:none; }
+    .skill-col.vis { opacity:1; transform:none; }
+    .skill-col-title { font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:1.8rem; padding-bottom:1rem; border-bottom:1px solid var(--line); }
+    .skill-items { display:flex; flex-direction:column; gap:0.75rem; }
+    .skill-item { font-size:0.82rem; color:var(--ink2); display:flex; align-items:center; gap:0.8rem; line-height:1.5; }
+    .skill-item::before { content:''; width:18px; height:1px; background:var(--gold); flex-shrink:0; }
 
-/* SECTION TITLE */
-h3{
-  font-size:14px;
-  font-weight:500;
-  letter-spacing:3px;
-  margin-top:60px;
-  margin-bottom:15px;
-  opacity:0.8;
-}
-
-/* TEXT */
-p{
-  font-size:15px;
-  line-height:1.7;
-  opacity:0.85;
-  max-width:700px;
-}
-
-/* EXPERIENCE BLOCK */
-.block{
-  margin-bottom:18px;
-  padding:14px 0;
-  border-bottom:1px solid rgba(0,0,0,0.08);
-}
-
-.block b{
-  font-weight:500;
-}
-
-/* CONTACT */
-.contact{
-  margin-top:30px;
-  font-size:14px;
-  opacity:0.8;
-  line-height:1.8;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .photo{
-    position:relative;
-    margin:20px;
-  }
-
-  .container{
-    padding:20px;
-  }
-
-  h1{
-    font-size:34px;
-  }
-}
-</style>
-
-</head>
-
-<body>
-
-<img src="me.jpg" class="photo" alt="photo">
-
-<div class="container">
-
-  <h1>УЛАР БЕКТУРСУН</h1>
-  <h2>АДМИНИСТРАТОР</h2>
-
-  <p>
-    Опытный администратор с навыками премиального сервиса,
-    управления персоналом и контроля качества обслуживания.
-  </p>
-
-  <h3>ОПЫТ РАБОТЫ</h3>
-
-  <div class="block">
-    <b>Ресторан «Туман» | Ош</b><br>
-    Администратор<br>
-    Встреча гостей, управление залом, банкеты, контроль сервиса
-  </div>
-
-  <div class="block">
-    <b>Клуб «Green Club» | Каракол</b><br>
-    Администратор<br>
-    Оперативное управление, контроль персонала и безопасности
-  </div>
-
-  <div class="block">
-    <b>Medical Assistance Group | Бишкек</b><br>
-    Старший администратор / Контроль качества (2024 — наст. время)<br>
-    Управление сменой, KPI, касса, аналитика, претензии
-  </div>
-
-  <h3>ОБРАЗОВАНИЕ</h3>
-
-  <div class="block">
-    Кыргызская государственная медицинская академия (КГМА)<br>
-    Стоматология (2022 — настоящее время)
-  </div>
-
-  <h3>КОНТАКТЫ</h3>
-
-  <div class="contact">
-    📞 +996 559 463 626<br>
-    📧 tensor620@gmail.com
-  </div>
-
-</div>
-
-</body>
-</html>
+    .edu-block { display:grid; grid-template-columns:260px 1fr; g
